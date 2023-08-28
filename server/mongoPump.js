@@ -1,4 +1,3 @@
-const server = require('./server');
 require('dotenv').config();
 
 const MongoClient = require('mongodb').MongoClient;
@@ -19,19 +18,20 @@ async function connectToDB() {
 connectToDB();
 
 
-async function insertDocument() {
+async function insertDocument(collection_name,document) {
     try {
         const db = client.db(DB);
-        const collection = db.collection('Users');
+        const collection = db.collection(collection_name);
 
-        const document = {
-        email: 'val1',
-        password: 'value2',
-          // Add more fields as needed
-      };
+    //     const document = {
+    //     email: 'val1',
+    //     password: 'value2',
+    //       // Add more fields as needed
+    //   };
 
       const result = await collection.insertOne(document);
       console.log('Document inserted:', result.insertedId);
+      return {collection_id:result.insertedId}
   } catch (error) {
       console.error('Error inserting document', error);
   } finally {
@@ -40,17 +40,18 @@ async function insertDocument() {
 }
 // insertDocument()
 
-async function fetchDocuments() {
+async function fetchDocuments(collection_name,query) {
     try {
         const db = client.db(DB);
-        const collection = db.collection('Users');
+        const collection = db.collection(collection_name);
 
-        const query = {
-            email:"value1",password:"value2"
-        };
+        // const query = {
+        //     email:"value1",password:"value2"
+        // };
 
         const documents = await collection.find(query).toArray();
         console.log('Fetched documents:', documents);
+        return documents
     } catch (error) {
         console.error('Error fetching documents', error);
     } finally {
