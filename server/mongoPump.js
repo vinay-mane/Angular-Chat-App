@@ -30,7 +30,7 @@ async function insertDocument(collection_name,document) {
     //   };
 
       const result = await collection.insertOne(document);
-      console.log('Document inserted:', result.insertedId);
+      console.log('Document inserted->', result.insertedId);
       return {collection_id:result.insertedId}
   } catch (error) {
       console.error('Error inserting document', error);
@@ -50,7 +50,7 @@ async function fetchDocuments(collection_name,query) {
         // };
 
         const documents = await collection.find(query).toArray();
-        console.log('Fetched documents:', documents);
+        console.log('Fetched documents->', documents);
         return documents
     } catch (error) {
         console.error('Error fetching documents', error);

@@ -14,7 +14,7 @@ app.get('/',(req,res)=>{
 })
 
 app.get('/reg',async(req,res)=>{
-  const result = await use.register('aa','bb')
+  const result = await use.register('axb','bb')
   console.log(result)
   res.json(result)
 })
