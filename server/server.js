@@ -13,8 +13,14 @@ app.get('/',(req,res)=>{
   res.send('works')
 })
 
-app.get('/reg',async(req,res)=>{
-  const result = await use.register('axb','bb')
+app.get('/signup',async(req,res)=>{
+  const result = await use.register('axbf','bb')
+  console.log(result)
+  res.json(result)
+})
+
+app.get('/login',async(req,res)=>{
+  const result = await use.login('axbf','bb')
   console.log(result)
   res.json(result)
 })
