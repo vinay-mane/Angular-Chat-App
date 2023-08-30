@@ -1,3 +1,5 @@
+const { query } = require('express');
+
 require('dotenv').config();
 
 const MongoClient = require('mongodb').MongoClient;
@@ -18,9 +20,9 @@ async function connectToDB() {
 connectToDB();
 
 
-async function insertDocument(collection_name,document) {
+async function insertDocument(database_name,collection_name,document) {
     try {
-        const db = client.db(DB);
+        const db = client.db(database_name);
         const collection = db.collection(collection_name);
 
     //     const document = {
@@ -40,9 +42,9 @@ async function insertDocument(collection_name,document) {
 }
 // insertDocument()
 
-async function fetchDocuments(collection_name,query) {
+async function fetchDocuments(database_name,collection_name,query) {
     try {
-        const db = client.db(DB);
+        const db = client.db(database_name);
         const collection = db.collection(collection_name);
 
         // const query = {
@@ -59,7 +61,28 @@ async function fetchDocuments(collection_name,query) {
     }
 }
 
+async function pushDocuments(database_name,collection_name,where,data) {
+    try {
+        const db = client.db(database_name);
+        const collection = db.collection(collection_name);
+
+        // const query = {
+        //     email:"value1",password:"value2"
+        // };
+
+        const documents = await collection.updateOne(where,{ $push: data });
+        console.log('Fetched documents->', documents);
+        return documents
+    } catch (error) {
+        console.error('Error fetching documents', error);
+    } finally {
+        // client.close();
+    }
+}
+
+
 module.exports={
   insertDocument:insertDocument,
-  fetchDocuments:fetchDocuments
+  fetchDocuments:fetchDocuments,
+  pushDocuments:pushDocuments
 }
