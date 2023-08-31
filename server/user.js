@@ -23,11 +23,17 @@ const register = async(email,password)=>{
 }
 
 const login = async(email,password)=>{
-  const user = mongoPump.fetchDocuments(database_name,user_collection_name,{email:email,password:password})
+  const user = await mongoPump.fetchDocuments(database_name,user_collection_name,{email:email,password:hash(password)})[0]
   return user
+}
+
+const authToUser = async(data)=>{
+  const user = await mongoPump.fetchDocuments(database_name,user_collection_name,{password:data.auth})
+  return user[0]
 }
 
 module.exports={
   register:register,
-  login:login
+  login:login,
+  authToUser:authToUser
 }

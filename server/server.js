@@ -3,12 +3,15 @@ require('dotenv').config();
 // const mongoPump = require('./mongoPump')
 const use = require('./user');
 const message = require('./message');
+const { async } = require('rxjs');
+const { addAuth } = require('./middleware');
 
 const PORT = process.env.PORT
 const MONGO = process.env.MONGO
 
 const app = Express()
 app.use(Express.json());
+app.use(addAuth)
 
 app.get('/',(req,res)=>{
   res.send('works')
@@ -26,8 +29,8 @@ app.get('/login',async(req,res)=>{
   res.json(result)
 })
 
-app.get('/send',async(req,res)=>{
-  const result = await message.sendMessage('vinay1','vinay3','message')
+app.post('/send',async(req,res)=>{
+  const result = await message.sendMessage(req.body.email,req.body.reciver,req.body.message)
   console.log(result)
   res.json(result)
 })
@@ -44,10 +47,15 @@ app.get('/start',async(req,res)=>{
   res.json(result)
 })
 
-app.get('/fetch',async(req,res)=>{
-  const result = await message.fetchMessage('vinay1','vinay2')
+app.post('/fetch',async(req,res)=>{
+  const result = await message.fetchMessage(req.body.email,req.body.reciver)
   console.log(result)
   res.json(result)
+})
+
+app.post('/test',async(req,res)=>{
+  // console.log(await use.authToUser(req.body))
+  res.json(req.body)
 })
 
 // app.get('/insert',async(req,res)=>{

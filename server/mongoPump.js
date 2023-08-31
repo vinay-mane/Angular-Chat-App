@@ -70,7 +70,7 @@ async function pushDocuments(database_name,collection_name,where,data) {
         //     email:"value1",password:"value2"
         // };
 
-        const documents = await collection.updateOne(where,{ $push: data });
+        const documents = await collection.updateOne(where,{ $push: data },{ upsert: true });
         console.log('Fetched documents->', documents);
         return documents
     } catch (error) {
