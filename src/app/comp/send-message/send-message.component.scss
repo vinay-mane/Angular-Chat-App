@@ -1,0 +1,40 @@
+.send{
+  padding: 15px 30px 15px 30px;
+  background-color: rgba(255, 255, 255, 0.116);
+  margin: 10px;
+  margin-top: 0px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+input[type="text"]{
+  background-color: rgba(247, 247, 247, 0);
+  outline: none; /* Remove the default focus outline */
+  border: none; /* Remove the border */
+  width: 70%;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+
+}
+
+input:focus{
+  outline: none; /* Remove the default focus outline */
+  border: none; /* Remove the border */
+
+}
+
+.send-txt{
+  height: 30px;
+  width: 30px;
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  outline: none; /* Remove the default focus outline */
+  border: none; /* Remove the border */
+  // background-image: 'https://www.svgrepo.com/show/533621/arrow-sm-right.svg';
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  font-size: 16px;
+  color: greenyellow;
+}
