@@ -80,9 +80,18 @@ async function pushDocuments(database_name,collection_name,where,data) {
     }
 }
 
+async function findDocs(database_name,collection_name,field_name){
+    const db = client.db(database_name);
+    const collection = db.collection(collection_name);
+    const list = await collection.find({}).project({ [field_name]: 1 }).toArray();
+    console.log(list)
+    return(list)
+}
+
 
 module.exports={
   insertDocument:insertDocument,
   fetchDocuments:fetchDocuments,
-  pushDocuments:pushDocuments
+  pushDocuments:pushDocuments,
+  findDocs:findDocs
 }

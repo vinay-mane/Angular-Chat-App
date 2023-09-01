@@ -1,15 +1,18 @@
 const Express = require('express')
+const cors = require('cors');
 require('dotenv').config();
 // const mongoPump = require('./mongoPump')
 const use = require('./user');
 const message = require('./message');
 const { async } = require('rxjs');
 const { addAuth } = require('./middleware');
+const user = require('./user');
 
 const PORT = process.env.PORT
 const MONGO = process.env.MONGO
 
 const app = Express()
+app.use(cors());
 app.use(Express.json());
 app.use(addAuth)
 
@@ -53,8 +56,14 @@ app.post('/fetch',async(req,res)=>{
   res.json(result)
 })
 
+app.post('/contact_list',async(req,res)=>{
+  const result = await use.listUsersContact(req.body)
+  res.send(result)
+})
+
 app.post('/test',async(req,res)=>{
   // console.log(await use.authToUser(req.body))
+  use.listUsersContact()
   res.json(req.body)
 })
 

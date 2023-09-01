@@ -32,8 +32,14 @@ const authToUser = async(data)=>{
   return user[0]
 }
 
+const listUsersContact = async(data)=>{
+  const list = await mongoPump.findDocs('Messages',data.email,'name')
+  return list
+}
+
 module.exports={
   register:register,
   login:login,
-  authToUser:authToUser
+  authToUser:authToUser,
+  listUsersContact:listUsersContact
 }

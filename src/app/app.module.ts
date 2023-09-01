@@ -6,6 +6,7 @@ import { SideBarComponent } from './comp/side-bar/side-bar.component';
 import { ChatComponent } from './comp/chat/chat.component';
 import { NavComponent } from './comp/nav/nav.component';
 import { SendMessageComponent } from './comp/send-message/send-message.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { SendMessageComponent } from './comp/send-message/send-message.component
     SendMessageComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
