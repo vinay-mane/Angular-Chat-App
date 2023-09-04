@@ -1,5 +1,6 @@
 import { Component,OnInit  } from '@angular/core';
 import {ApiServiceService} from '../api-service.service';
+import { AppComponent } from 'src/app/app.component';
 
 
 @Component({
@@ -9,24 +10,10 @@ import {ApiServiceService} from '../api-service.service';
 })
 export class SideBarComponent implements OnInit{
   users = [
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
-    {'name':'vinay'},
+    {'name':''},
+    {'email':''},
   ]
-  constructor(private apiServiceService: ApiServiceService) {}
+  constructor(private apiServiceService: ApiServiceService,private appComponent: AppComponent) {}
 
   getContactList_(auth: string) {
     this.apiServiceService.getContactList(auth).subscribe(
@@ -42,7 +29,11 @@ export class SideBarComponent implements OnInit{
     );
   }
 
+  setReciver(user:string){
+    this.appComponent.reciver=user
+  }
+
   ngOnInit() {
-    this.getContactList_('6dcc28b88dd0d327bf050146aed70022ea55bcd6dc92a2b68bc7e844c5d8755b81087da217ae62211ec7a6d0c09d46d5f29a61e1934b552cafe1057c415a43c3')
+    this.getContactList_(this.appComponent.auth)
   }
 }

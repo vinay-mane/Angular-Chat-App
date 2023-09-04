@@ -33,7 +33,7 @@ const authToUser = async(data)=>{
 }
 
 const listUsersContact = async(data)=>{
-  const list = await mongoPump.findDocs('Messages',data.email,'name')
+  const list = await mongoPump.findDocs('ChatApp','User','email')
   return list
 }
 

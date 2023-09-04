@@ -1,13 +1,15 @@
 const mongoPump = require('./mongoPump.js')
+const currentDate = new Date();
 
 const sendMessage = async(sender,reciver,message)=>{
+  const currentDateTime = currentDate.toLocaleString();
   const result_s = await mongoPump.pushDocuments('Messages',sender,
     {name:reciver},
-    {message:message}
+    {message:{text:message.message,name:sender,dt:currentDateTime}}
   )
   const result_r = await mongoPump.pushDocuments('Messages',reciver,
     {name:sender},
-    {message:message}
+    {message:{text:message.message,name:reciver,dt:currentDateTime}}
   )
   return {}
 }
@@ -34,7 +36,7 @@ const fetchMessage = async(sender,reciver)=>{
       name:reciver,
     },
   )
-  return result
+  return result[0]
 }
 
 
